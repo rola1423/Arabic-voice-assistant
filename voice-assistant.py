@@ -8,7 +8,7 @@ import os
 import time
 
 # إعداد Cohere
-co = cohere.Client("YOUR_API_KEY")
+co = cohere.Client("YOUR_API_KEY")  # Replace with your actual key in local use
 
 # تحميل نموذج Whisper 
 whisper_model = whisper.load_model("base")
