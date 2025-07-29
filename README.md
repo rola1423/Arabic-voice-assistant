@@ -1,54 +1,68 @@
 # 🗣️ Arabic Voice Assistant
 
-This is a simple Arabic voice assistant built with:
-- [Whisper](https://github.com/openai/whisper) (for speech-to-text)
-- [Cohere](https://cohere.com/) (for natural language understanding & reply)
-- [gTTS](https://pypi.org/project/gTTS/) (for Arabic text-to-speech)
-- [Pygame](https://www.pygame.org/) (to play audio files)
+This is a simple **Arabic voice assistant** that listens to your voice, understands your Arabic commands, and responds with spoken Arabic.
 
-> The assistant listens to your Arabic voice, understands it, replies using Cohere API, and speaks the response aloud.
+Built using:
+- [Whisper](https://github.com/openai/whisper) for Arabic speech-to-text
+- [Cohere](https://cohere.com/) API for smart responses
+- [gTTS](https://pypi.org/project/gTTS/) for Arabic text-to-speech
+- [pygame](https://www.pygame.org/) to play the generated audio
 
 ---
 
 ## ✅ Features
 
-- 🔊 Arabic voice input from microphone
-- ✨ Smart replies using Cohere's LLM
-- 🔁 Text-to-speech in Arabic using gTTS
-- 🎧 Audio playback using pygame
+- 🎙️ Arabic voice input using your microphone
+- 🧠 Smart Arabic replies powered by Cohere's LLM
+- 🗣️ Arabic text-to-speech via gTTS
+- 🔊 Audio response playback using pygame
 - 🖥️ Fully runs locally (except Cohere API)
 
 ---
 
 ## 📦 Requirements
 
-Before running the project, install these Python packages:
+Install dependencies using:
 
 ```bash
 pip install speechrecognition pygame gtts openai-whisper cohere
-If Whisper needs it, you may also install ffmpeg:
+You also need ffmpeg for Whisper to process audio files.
+
+On Windows: install from https://ffmpeg.org/download.html
+
+On Linux/macOS:
 
 bash
 
-IF YOU RUN THE CODE:
+sudo apt install ffmpeg
+🚀 How to Run
+Clone this repo or copy the voice_assistant.py file.
+
+Make sure your microphone is connected.
+
+Run the script:
+
+bash
+
+python voice_assistant.py
 You will hear:
+
 "أهلًا بك انا المساعد الصوتي الذكي! قل خروج لإنهاء المحادثة."
 
-Then, speak into your microphone. The assistant will:
+Then:
 
-Convert your voice to text using Whisper.
+Speak in Arabic.
 
-Send the text to Cohere.
+It transcribes your speech using Whisper.
 
-Speak the reply using gTTS + pygame.
+Sends the transcribed text to Cohere for response.
 
-To exit the conversation, say: "خروج" or "إنهاء".
+Replies back to you in Arabic using TTS audio.
 
-🧠 Code Explanation 
-See voice-assistant.py for full code.
-The main steps are:
+Say "خروج" or "إنهاء" to exit.
 
-1. Setup Libraries
+🧠 Code Structure & Explanation
+1. Library Imports
 python
 
 import speech_recognition as sr
@@ -59,63 +73,56 @@ import pygame
 import tempfile
 import os
 import time
-These are required for voice input, AI chat, TTS, and audio playback.
-
-2. Load APIs
+2. API Setup
 python
-
-co = cohere.Client("YOUR-API-KEY")
+co = cohere.Client("YOUR_API_KEY")
 whisper_model = whisper.load_model("base")
-Cohere is used for replies.
-
-Whisper is for local Arabic speech recognition.
-
 3. Speak Function
 python
 
 def speak(text):
     ...
-Uses gTTS to convert Arabic text to .mp3.
+Converts Arabic text to .mp3 using gTTS.
 
-Plays it with pygame.
+Plays the result with pygame.
 
 4. Record Audio
 python
 
 def record_audio(filename="temp.wav"):
     ...
-Records your voice and saves it as a WAV file.
+Records from your microphone using speech_recognition.
 
 5. Transcribe Audio
 python
+
 def transcribe_with_whisper(filename):
     ...
-Converts WAV to Arabic text using Whisper.
+Uses Whisper model to convert Arabic voice to text.
 
-6. Get AI Reply
-python
+6. Get AI Response
+pytho
+
 def get_reply(prompt):
     ...
-Sends your prompt to Cohere and gets a reply.
+Sends user text to Cohere API and returns the response.
 
-7. Main Assistant Loop
+7. Main Loop
 python
 
 def main():
     ...
-Repeats the process:
+Repeats the full loop:
 
-Listen
+Record
 
-Understand
+Transcribe
 
-Reply
+Get AI reply
 
-Speak
+Speak it back
 
-🎤 Example Output
-text
+💬 Example Output
 
 🎙️ تفضل بالكلام...
 👤 قلت: كيف حالك اليوم؟
-🤖 المساعد الصوتي الذكي: أنا بخير، شكرًا لسؤالك!
