@@ -8,7 +8,7 @@ import os
 import time
 
 # إعداد Cohere
-co = cohere.Client("wuEHVn6bNfKVP3RwDa2KPTibHSwqFKjKTY0hi5xC")
+co = cohere.Client("YOUR_API_KEY")
 
 # تحميل نموذج Whisper 
 whisper_model = whisper.load_model("base")
