@@ -1,73 +1,63 @@
-🗣️ Arabic Voice Assistant
-A simple Arabic voice assistant that listens to your speech, understands your Arabic commands, and responds in spoken Arabic.
+# 🗣️ Arabic Voice Assistant
 
-🔧 Built With
-Whisper for Arabic speech-to-text
+This is a simple Arabic voice assistant that listens to your voice, understands your Arabic commands, and responds with spoken Arabic.
 
-Cohere API for smart Arabic responses
+## 🛠 Built Using
+- **Whisper** for Arabic speech-to-text
+- **Cohere API** for smart responses
+- **gTTS** for Arabic text-to-speech
+- **pygame** to play the generated audio
 
-gTTS for Arabic text-to-speech
+## ✅ Features
+- 🎙️ Arabic voice input using your microphone
+- 🧠 Smart Arabic replies powered by Cohere's LLM
+- 🗣️ Arabic text-to-speech via gTTS
+- 🔊 Audio response playback using pygame
+- 🖥️ Fully runs locally (except Cohere API)
 
-pygame for audio playback
+## 📦 Requirements
 
-✅ Features
-🎙️ Arabic voice input via your microphone
+Install dependencies using:
 
-🧠 Smart Arabic responses powered by Cohere LLM
-
-🔊 Arabic voice feedback using gTTS
-
-🖥️ Lightweight, local processing (except for Cohere API)
-
-📦 Requirements
-Install the necessary dependencies:
-
-bash
-نسخ الكود
+```bash
 pip install speechrecognition pygame gtts openai-whisper cohere
-Additional Requirement:
-FFmpeg is required for Whisper to handle audio files.
+```
 
-On Windows:
-Download and install from ffmpeg.org/download.html
+You also need **ffmpeg** for Whisper to process audio files.
 
-On Linux/macOS:
+- On **Windows**: install from [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html)
+- On **Linux/macOS**:
 
-bash
-نسخ الكود
+```bash
 sudo apt install ffmpeg
-🚀 How to Run
-Clone this repository or copy the voice_assistant.py file.
+```
 
-Make sure your microphone is connected.
+## 🚀 How to Run
 
-Run the script:
+1. Clone this repo or copy the `voice_assistant.py` file.
+2. Make sure your microphone is connected.
+3. Run the script:
 
-bash
-نسخ الكود
+```bash
 python voice_assistant.py
-You'll hear:
+```
 
-"أهلًا بك انا المساعد الصوتي الذكي! قل خروج لإنهاء المحادثة."
+You will hear:
 
-Then:
+> "أهلًا بك انا المساعد الصوتي الذكي! قل خروج لإنهاء المحادثة."
 
-Speak in Arabic
+### Then:
 
-It will:
+- Speak in Arabic
+- It transcribes your speech using Whisper
+- Sends the transcribed text to Cohere for response
+- Replies back to you in Arabic using TTS audio
+- Say "خروج" or "إنهاء" to exit
 
-Transcribe your voice with Whisper
+## 🧠 Code Structure & Explanation
 
-Send the text to Cohere for response
-
-Reply in Arabic using TTS
-
-Say "خروج" or "إنهاء" to exit the loop.
-
-🧠 Code Overview
-1. Importing Libraries
-python
-نسخ الكود
+### 1. Library Imports
+```python
 import speech_recognition as sr
 import cohere
 import whisper
@@ -76,40 +66,61 @@ import pygame
 import tempfile
 import os
 import time
-2. API Setup
-python
-نسخ الكود
-co = cohere.Client("YOUR_API_KEY")  # Replace with your actual API key securely
+```
+
+### 2. API Setup
+```python
+co = cohere.Client("YOUR_API_KEY")
 whisper_model = whisper.load_model("base")
-💡 Never commit your API key to a public repository. Use environment variables or a config file instead.
+```
 
-3. speak(text) Function
-Converts Arabic text to .mp3 using gTTS
+### 3. Speak Function
+```python
+def speak(text):
+    ...
+```
+- Converts Arabic text to `.mp3` using gTTS
+- Plays the result with pygame
 
-Plays it back using pygame
+### 4. Record Audio
+```python
+def record_audio(filename="temp.wav"):
+    ...
+```
+- Records from your microphone using `speech_recognition`
 
-4. record_audio()
-Records audio input from your microphone using SpeechRecognition.
+### 5. Transcribe Audio
+```python
+def transcribe_with_whisper(filename):
+    ...
+```
+- Uses Whisper model to convert Arabic voice to text
 
-5. transcribe_with_whisper()
-Uses Whisper to convert recorded Arabic speech into text.
+### 6. Get AI Response
+```python
+def get_reply(prompt):
+    ...
+```
+- Sends user text to Cohere API and returns the response
 
-6. get_reply(prompt)
-Sends user input to Cohere API and returns the generated response.
+### 7. Main Loop
+```python
+def main():
+    ...
+```
+Repeats the full loop:
 
-7. main()
-The main loop that:
+- Record
+- Transcribe
+- Get AI reply
+- Speak it back
 
-Records voice
+## 💬 Example Output
 
-Transcribes it
-
-Gets AI response
-
-Speaks it back
-
-💬 Example
-نسخ الكود
+```
 🎙️ تفضل بالكلام...
 👤 قلت: كيف حالك اليوم؟
 🧠 المساعد: أنا بخير، شكرًا لسؤالك!
+```
+
+---
