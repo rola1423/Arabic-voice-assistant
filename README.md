@@ -32,7 +32,7 @@ On Windows: install from https://ffmpeg.org/download.html
 
 On Linux/macOS:
 
-bash
+```bash
 
 sudo apt install ffmpeg
 🚀 How to Run
@@ -42,7 +42,7 @@ Make sure your microphone is connected.
 
 Run the script:
 
-bash
+```bash
 
 python voice_assistant.py
 You will hear:
